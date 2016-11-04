@@ -96,11 +96,11 @@ public func shouldShowDontRateButton(_ shouldShowDontRateButton: Bool) {
  * Get/Set the 'rate' modal vc should keep current status bar style.
  * Default value is false
  */
-public func keppStatusBarStyle() -> Bool {
-    return Manager.defaultManager.keppStatusBarStyle
+public func keepStatusBarStyle() -> Bool {
+    return Manager.defaultManager.keepStatusBarStyle
 }
-public func shouldKeppStatusBarStyle(_ keppStatusBarStyle: Bool) {
-    Manager.defaultManager.keppStatusBarStyle = keppStatusBarStyle
+public func shouldKeepStatusBarStyle(_ keepStatusBarStyle: Bool) {
+    Manager.defaultManager.keepStatusBarStyle = keepStatusBarStyle
 }
 
 /*
@@ -877,7 +877,7 @@ open class Manager : ArmchairManager {
     }
     
     fileprivate var showsDontRate: Bool                      = true
-    fileprivate var keppStatusBarStyle: Bool                 = false
+    fileprivate var keepStatusBarStyle: Bool                 = false
     
     // If you aren't going to set an affiliate code yourself, please leave this as is.
     // It is my affiliate code. It is better that somebody's code is used rather than nobody's.
@@ -1416,7 +1416,7 @@ open class Manager : ArmchairManager {
                         self.modalPanelOpen = true
                         self.currentStatusBarStyle = UIApplication.shared.statusBarStyle
                         
-                        if keppStatusBarStyle == false {
+                        if self.keepStatusBarStyle == false {
                             //Temporarily use a status bar to match the StoreKit view.
                             UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: self.usesAnimation)
                         }
