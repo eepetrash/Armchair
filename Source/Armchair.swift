@@ -82,6 +82,17 @@ public func reviewMessage(_ reviewMessage: String) {
 }
 
 /*
+ * Get/Set the promt to show the 'Don't rate' buuton.
+ * Default value is true
+ */
+public func showsDontRateButton() -> Bool {
+    return Manager.defaultManager.showsDontRate
+}
+public func shouldShowDontRateButton(_ shouldShowDontRateButton: Bool) {
+    Manager.defaultManager.showsDontRate = shouldShowDontRateButton
+}
+
+/*
  * Get/Set the cancel button title to use on the review prompt.
  * Default value is a localized "No, Thanks"
  */
@@ -854,6 +865,8 @@ open class Manager : ArmchairManager {
         }
     }
     
+    fileprivate var showsDontRate: Bool                      = true
+    
     // If you aren't going to set an affiliate code yourself, please leave this as is.
     // It is my affiliate code. It is better that somebody's code is used rather than nobody's.
     fileprivate var affiliateCode: String                   = "11l7j9"
@@ -1188,10 +1201,14 @@ open class Manager : ArmchairManager {
             if (operatingSystemVersion >= 8 && usesAlertController) || operatingSystemVersion >= 9 {
                 /* iOS 8 uses new UIAlertController API*/
                 let alertView : UIAlertController = UIAlertController(title: reviewTitle, message: reviewMessage, preferredStyle: UIAlertControllerStyle.alert)
-                alertView.addAction(UIAlertAction(title: cancelButtonTitle, style:UIAlertActionStyle.cancel, handler: {
-                    (alert: UIAlertAction!) in
-                    self.dontRate()
-                }))
+                
+                if showsDontRate {
+                    alertView.addAction(UIAlertAction(title: cancelButtonTitle, style:UIAlertActionStyle.cancel, handler: {
+                        (alert: UIAlertAction!) in
+                        self.dontRate()
+                    }))
+                }
+                
                 if (showsRemindButton()) {
                     alertView.addAction(UIAlertAction(title: remindButtonTitle!, style:UIAlertActionStyle.default, handler: {
                         (alert: UIAlertAction!) in
