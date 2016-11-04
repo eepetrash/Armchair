@@ -1419,6 +1419,9 @@ open class Manager : ArmchairManager {
                             //Temporarily use a status bar to match the StoreKit view.
                             UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.default, animated: self.usesAnimation)
                         }
+                        else {
+                            UIApplication.shared.setStatusBarStyle(self.currentStatusBarStyle, animated: self.usesAnimation)
+                        }
                     }
                 }
                 
