@@ -1410,11 +1410,10 @@ open class Manager : ArmchairManager {
                     closure(usesAnimation)
                 }
                 
-                
+                self.currentStatusBarStyle = UIApplication.shared.statusBarStyle
                 if let rootController = getRootViewController() {
                     rootController.present(storeViewController, animated: usesAnimation) {
                         self.modalPanelOpen = true
-                        self.currentStatusBarStyle = UIApplication.shared.statusBarStyle
                         
                         if self.keepStatusBarStyle == false {
                             //Temporarily use a status bar to match the StoreKit view.
